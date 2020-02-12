@@ -28,7 +28,7 @@
                     <div class="form-group required">
                         <label class="col-sm-2 control-label" for="input-pay-id"><?php echo $entry_pay_id;?></label>
                         <div class="col-sm-10">
-                            <input type="text" name="bhartipay_pay_id" value="<?php echo $bhartipay_pay_id;?>" placeholder="<?php echo $entry_pay_id;?>" id="input-pay-id" class="form-control" />
+                            <input type="text" name="subpe_pay_id" value="<?php echo $subpe_pay_id;?>" placeholder="<?php echo $entry_pay_id;?>" id="input-pay-id" class="form-control" />
                             <?php if($error_pay_id): ?>
                             <div class="text-danger"><?php echo $error_pay_id;?></div>
                             <?php endif;; ?>
@@ -37,7 +37,7 @@
                     <div class="form-group required">
                         <label class="col-sm-2 control-label" for="input-salt"><span data-toggle="tooltip" title="<?php echo $help_salt;?>"><?php echo $entry_salt;?></span></label>
                         <div class="col-sm-10">
-                            <input type="text" name="bhartipay_salt" value="<?php echo $bhartipay_salt;?>" placeholder="<?php echo $entry_salt;?>" id="input-salt" class="form-control" />
+                            <input type="text" name="subpe_salt" value="<?php echo $subpe_salt;?>" placeholder="<?php echo $entry_salt;?>" id="input-salt" class="form-control" />
                             <?php if($error_salt): ?>
                             <div class="text-danger"><?php echo $error_salt;?></div>
                             <?php endif;; ?>
@@ -47,20 +47,20 @@
                         <label class="col-sm-2 control-label"><?php echo $entry_test;?></label>
                         <div class="col-sm-10">
                             <label class="radio-inline">
-                                <?php if($bhartipay_test): ?>
-                                <input type="radio" name="bhartipay_test" value="1" checked="checked" />
+                                <?php if($subpe_test): ?>
+                                <input type="radio" name="subpe_test" value="1" checked="checked" />
                                 <?php echo $text_yes;?>
                                 <?php else: ?>
-                                <input type="radio" name="bhartipay_test" value="1" />
+                                <input type="radio" name="subpe_test" value="1" />
                                 <?php echo $text_yes;?>
                                 <?php endif;; ?>
                             </label>
                             <label class="radio-inline">
-                                <?php if(!$bhartipay_test):?>
-                                <input type="radio" name="bhartipay_test" value="0" checked="checked" />
+                                <?php if(!$subpe_test):?>
+                                <input type="radio" name="subpe_test" value="0" checked="checked" />
                                 <?php echo $text_no;?>
                                 <?php else:?>
-                                <input type="radio" name="bhartipay_test" value="0" />
+                                <input type="radio" name="subpe_test" value="0" />
                                 <?php echo $text_no;?>
                                 <?php endif;; ?>
                             </label>
@@ -69,15 +69,15 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label" for="input-total"><span data-toggle="tooltip" title="<?php echo $help_total;?>"><?php echo $entry_total;?></span></label>
                         <div class="col-sm-10">
-                            <input type="text" name="bhartipay_total" value="<?php echo $bhartipay_total;?>" placeholder="<?php echo $entry_total;?>" id="input-total" class="form-control" />
+                            <input type="text" name="subpe_total" value="<?php echo $subpe_total;?>" placeholder="<?php echo $entry_total;?>" id="input-total" class="form-control" />
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label" for="input-order-status"><?php echo $entry_order_status;?></label>
                         <div class="col-sm-10">
-                            <select name="bhartipay_order_status_id" id="input-order-status" class="form-control">
+                            <select name="subpe_order_status_id" id="input-order-status" class="form-control">
                                 <?php foreach($order_statuses as $order_status){ ?>
-                                <?php if($order_status['order_status_id'] == $bhartipay_order_status_id):?>
+                                <?php if($order_status['order_status_id'] == $subpe_order_status_id):?>
                                 <option value="<?php echo $order_status['order_status_id'];?>" selected="selected"><?php echo $order_status['name'];?></option>
                                 <?php else:?>
                                 <option value="<?php echo $order_status['order_status_id'];?>"><?php echo $order_status['name'];?></option>
@@ -90,10 +90,10 @@
                         <label class="col-sm-2 control-label" for="input-geo-zone"><?php echo $entry_geo_zone;?></label>
                         <div class="col-sm-10">
 					 
-                            <select name="bhartipay_geo_zone_id" id="input-geo-zone" class="form-control">
+                            <select name="subpe_geo_zone_id" id="input-geo-zone" class="form-control">
                                 <option value="0"><?php echo $text_all_zones;?></option>
                                 <?php foreach($geo_zones as $geo_zone){?>
-                                <?php if ($geo_zone['geo_zone_id'] == $bhartipay_geo_zone_id): ?>
+                                <?php if ($geo_zone['geo_zone_id'] == $subpe_geo_zone_id): ?>
                                 <option value="<?php echo $geo_zone['geo_zone_id'];?>" selected="selected"><?php echo $geo_zone['name'];?></option>
                                 <?php else:?>
                                 <option value="<?php echo $geo_zone['geo_zone_id'];?>"><?php echo $geo_zone['name'];?></option>
@@ -105,8 +105,8 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label" for="input-status"><?php echo $entry_status;?></label>
                         <div class="col-sm-10">
-                            <select name="bhartipay_status" id="input-status" class="form-control">
-                                <?php if ($bhartipay_status): ?>
+                            <select name="subpe_status" id="input-status" class="form-control">
+                                <?php if ($subpe_status): ?>
                                 <option value="1" selected="selected"><?php echo $text_enabled;?></option>
                                 <option value="0"><?php echo $text_disabled;?></option>
                                 <?php else:?>
@@ -119,7 +119,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label" for="input-sort-order"><?php echo $entry_sort_order;?></label>
                         <div class="col-sm-10">
-                            <input type="text" name="bhartipay_sort_order" value="<?php echo $bhartipay_sort_order;?>" placeholder="<?php echo $entry_sort_order;?>" id="input-sort-order" class="form-control" />
+                            <input type="text" name="subpe_sort_order" value="<?php echo $subpe_sort_order;?>" placeholder="<?php echo $entry_sort_order;?>" id="input-sort-order" class="form-control" />
                         </div>
                     </div>
                 </form>

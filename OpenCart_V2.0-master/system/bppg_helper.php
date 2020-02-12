@@ -1,6 +1,6 @@
 <?php
 /**
-* BhartiPay PG Class
+* Subpe PG Class
 */
 class BPPGModule
 {

@@ -1,18 +1,18 @@
 <?php
-class ControllerPaymentBhartiPay extends Controller {
+class ControllerPaymentSubpe extends Controller {
     private $error = array();
 
     public function index() {
-        $this->load->language('payment/bhartipay');
+        $this->load->language('payment/subpe');
 		 $data['header'] = $this->load->controller('common/header');
         $data['column_left'] = $this->load->controller('common/column_left');
         $data['footer'] = $this->load->controller('common/footer');
-		$data['heading_title']=  $this->language->get('BhartiPay');
+		$data['heading_title']=  $this->language->get('Subpe');
 		$data['text_extension']=  $this->language->get('Extensions');
-		$data['text_success']=  $this->language->get('Success: You have modified BhartiPay account details!');
-		$data['text_edit']=  $this->language->get('Edit BhartiPay');
-		$data['text_bhartipay']=  $this->language->get('<img src="view/image/payment/bhartipay.png" alt="BhartiPay" title="BhartiPay" style="border: 1px solid #EEEEEE;" />');
-		$data['entry_pay_id']=  $this->language->get('BhartiPay Pay ID');
+		$data['text_success']=  $this->language->get('Success: You have modified Subpe account details!');
+		$data['text_edit']=  $this->language->get('Edit Subpe');
+		$data['text_subpe']=  $this->language->get('<img src="view/image/payment/subpe.png" alt="Subpe" title="Subpe" style="border: 1px solid #EEEEEE;" />');
+		$data['entry_pay_id']=  $this->language->get('Subpe Pay ID');
 		$data['entry_salt']=  $this->language->get('Salt');
 		$data['entry_test']=  $this->language->get('Test Mode');
 		$data['entry_total']=  $this->language->get('Total');
@@ -20,12 +20,12 @@ class ControllerPaymentBhartiPay extends Controller {
 		$data['entry_geo_zone']=  $this->language->get('Geo Zone');
 		$data['entry_status']=  $this->language->get('Status');
 		$data['entry_sort_order']=  $this->language->get('Sort Order');
-		$data['help_salt']=  $this->language->get('BhartiPay Salt');
+		$data['help_salt']=  $this->language->get('Subpe Salt');
 		$data['text_yes']=  $this->language->get('text_yes');
 		$data['text_no']=  $this->language->get('text_no');
 		$data['help_total']=  $this->language->get('The checkout total the order must reach before this payment method becomes active.');
-		$data['error_permission']=  $this->language->get('Warning: You do not have permission to modify payment BhartiPay!');
-		$data['error_pay_id']=  $this->language->get('BhartiPay Pay ID required!');
+		$data['error_permission']=  $this->language->get('Warning: You do not have permission to modify payment Subpe!');
+		$data['error_pay_id']=  $this->language->get('Subpe Pay ID required!');
 		$data['error_salt']=  $this->language->get('Salt required!');
 		$data['text_all_zones']=  $this->language->get('text_all_zones');
 		$data['text_enabled']=  $this->language->get('text_enabled');
@@ -36,7 +36,7 @@ class ControllerPaymentBhartiPay extends Controller {
         $this->load->model('setting/setting');
 
         if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
-            $this->model_setting_setting->editSetting('bhartipay', $this->request->post);
+            $this->model_setting_setting->editSetting('subpe', $this->request->post);
 
             $this->session->data['success'] = $this->language->get('text_success');
 
@@ -75,85 +75,85 @@ class ControllerPaymentBhartiPay extends Controller {
 
         $data['breadcrumbs'][] = array(
             'text' => $this->language->get('heading_title'),
-            'href' => $this->url->link('payment/bhartipay', 'token=' . $this->session->data['token'], 'SSL') 
+            'href' => $this->url->link('payment/subpe', 'token=' . $this->session->data['token'], 'SSL') 
         );
 
-        $data['action'] = $this->url->link('payment/bhartipay', 'token=' . $this->session->data['token'], 'SSL');
+        $data['action'] = $this->url->link('payment/subpe', 'token=' . $this->session->data['token'], 'SSL');
 
         $data['cancel'] = $this->url->link('extension/payment',  'token=' . $this->session->data['token'], 'SSL');
 
-        if (isset($this->request->post['bhartipay_pay_id'])) {
-            $data['bhartipay_pay_id'] = $this->request->post['bhartipay_pay_id'];
+        if (isset($this->request->post['subpe_pay_id'])) {
+            $data['subpe_pay_id'] = $this->request->post['subpe_pay_id'];
         } else {
-            $data['bhartipay_pay_id'] = $this->config->get('bhartipay_pay_id');
+            $data['subpe_pay_id'] = $this->config->get('subpe_pay_id');
         }
 
-        if (isset($this->request->post['bhartipay_salt'])) {
-            $data['bhartipay_pay_id'] = $this->request->post['bhartipay_salt'];
+        if (isset($this->request->post['subpe_salt'])) {
+            $data['subpe_pay_id'] = $this->request->post['subpe_salt'];
         } else {
-            $data['bhartipay_salt'] = $this->config->get('bhartipay_salt');
+            $data['subpe_salt'] = $this->config->get('subpe_salt');
         }
 
-        if (isset($this->request->post['bhartipay_test'])) {
-            $data['bhartipay_test'] = $this->request->post['bhartipay_test'];
+        if (isset($this->request->post['subpe_test'])) {
+            $data['subpe_test'] = $this->request->post['subpe_test'];
         } else {
-            $data['bhartipay_test'] = $this->config->get('bhartipay_test');
+            $data['subpe_test'] = $this->config->get('subpe_test');
         }
 
-        if (isset($this->request->post['bhartipay_total'])) {
-            $data['bhartipay_total'] = $this->request->post['bhartipay_total'];
+        if (isset($this->request->post['subpe_total'])) {
+            $data['subpe_total'] = $this->request->post['subpe_total'];
         } else {
-            $data['bhartipay_total'] = $this->config->get('bhartipay_total');
+            $data['subpe_total'] = $this->config->get('subpe_total');
         }
 
-        if (isset($this->request->post['bhartipay_order_status_id'])) {
-            $data['bhartipay_order_status_id'] = $this->request->post['bhartipay_order_status_id'];
+        if (isset($this->request->post['subpe_order_status_id'])) {
+            $data['subpe_order_status_id'] = $this->request->post['subpe_order_status_id'];
         } else {
-            $data['bhartipay_order_status_id'] = $this->config->get('bhartipay_order_status_id');
+            $data['subpe_order_status_id'] = $this->config->get('subpe_order_status_id');
         }
 
         $this->load->model('localisation/order_status');
 
         $data['order_statuses'] = $this->model_localisation_order_status->getOrderStatuses();
 
-        if (isset($this->request->post['bhartipay_geo_zone_id'])) {
-            $data['bhartipay_geo_zone_id'] = $this->request->post['bhartipay_geo_zone_id'];
+        if (isset($this->request->post['subpe_geo_zone_id'])) {
+            $data['subpe_geo_zone_id'] = $this->request->post['subpe_geo_zone_id'];
         } else {
-            $data['bhartipay_geo_zone_id'] = $this->config->get('bhartipay_geo_zone_id');
+            $data['subpe_geo_zone_id'] = $this->config->get('subpe_geo_zone_id');
         }
 
         $this->load->model('localisation/geo_zone');
 
         $data['geo_zones'] = $this->model_localisation_geo_zone->getGeoZones();
 
-        if (isset($this->request->post['bhartipay_status'])) {
-            $data['bhartipay_status'] = $this->request->post['bhartipay_status'];
+        if (isset($this->request->post['subpe_status'])) {
+            $data['subpe_status'] = $this->request->post['subpe_status'];
         } else {
-            $data['bhartipay_status'] = $this->config->get('bhartipay_status');
+            $data['subpe_status'] = $this->config->get('subpe_status');
         }
 
-        if (isset($this->request->post['bhartipay_sort_order'])) {
-            $data['bhartipay_sort_order'] = $this->request->post['bhartipay_sort_order'];
+        if (isset($this->request->post['subpe_sort_order'])) {
+            $data['subpe_sort_order'] = $this->request->post['subpe_sort_order'];
         } else {
-            $data['bhartipay_sort_order'] = $this->config->get('bhartipay_sort_order');
+            $data['subpe_sort_order'] = $this->config->get('subpe_sort_order');
         }
 
         $data['header'] = $this->load->controller('common/header');
         $data['column_left'] = $this->load->controller('common/column_left');
         $data['footer'] = $this->load->controller('common/footer'); 
-        $this->response->setOutput($this->load->view('payment/bhartipay.tpl', $data));
+        $this->response->setOutput($this->load->view('payment/subpe.tpl', $data));
     }
 
     protected function validate() {
-        if (!$this->user->hasPermission('modify', 'payment/bhartipay')) {
+        if (!$this->user->hasPermission('modify', 'payment/subpe')) {
             $this->error['warning'] = $this->language->get('error_permission');
         }
 
-        if (!$this->request->post['bhartipay_pay_id']) {
+        if (!$this->request->post['subpe_pay_id']) {
             $this->error['pay_id'] = $this->language->get('error_pay_id');
         }
 
-        if (!$this->request->post['bhartipay_salt']) {
+        if (!$this->request->post['subpe_salt']) {
             $this->error['salt'] = $this->language->get('error_salt');
         }
 

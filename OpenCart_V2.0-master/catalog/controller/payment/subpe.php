@@ -1,13 +1,13 @@
 <?php
 /**
  * @package     OpenCart
- * @author      BhartiPay
- * @copyright   Copyright (c) 2018, BhartiPay Services Pvt Ltd.
+ * @author      Subpe
+ * @copyright   Copyright (c) 2018, Subpe Services Pvt Ltd.
  * @license     https://opensource.org/licenses/GPL-3.0
- * @link        https://www.bhartipay.com
+ * @link        https://www.subpe.com
  */
 
-class ControllerPaymentBhartiPay extends Controller
+class ControllerPaymentSubpe extends Controller
 {
 
     /**
@@ -23,25 +23,25 @@ class ControllerPaymentBhartiPay extends Controller
     public function index()
     {
         require_once(DIR_SYSTEM . 'bppg_helper.php');
-        if (!$this->config->get('bhartipay_test')) {
-            $data['action'] = 'https://merchant.bhartipay.com/crm/jsp/paymentrequest';
+        if (!$this->config->get('subpe_test')) {
+            $data['action'] = 'https://merchant.subpe.com/crm/jsp/paymentrequest';
         } else {
-            $data['action'] = 'https://uat.bhartipay.com/crm/jsp/paymentrequest';
+            $data['action'] = 'https://uat.subpe.com/crm/jsp/paymentrequest';
         }
- 		$this->load->language('payment/bhartipay');
+ 		$this->load->language('payment/subpe');
 		
         $this->load->model('checkout/order');
 
         $order_info = $this->model_checkout_order->getOrder($this->session->data['order_id']);
 
-        $return_url = $this->url->link('payment/bhartipay/callback', 'language=' . $this->config->get('config_language') . '&hash=' . md5($order_info['order_id'] . $order_info['total'] . $order_info['currency_code'] . $this->config->get('bhartipay_salt')));
+        $return_url = $this->url->link('payment/subpe/callback', 'language=' . $this->config->get('config_language') . '&hash=' . md5($order_info['order_id'] . $order_info['total'] . $order_info['currency_code'] . $this->config->get('subpe_salt')));
 
         $transaction_request = new BPPGModule();
 
         /* Setting all values here */
-        $transaction_request->setPayId($this->config->get('bhartipay_pay_id'));
+        $transaction_request->setPayId($this->config->get('subpe_pay_id'));
         $transaction_request->setPgRequestUrl($data['action']);
-        $transaction_request->setSalt($this->config->get('bhartipay_salt'));
+        $transaction_request->setSalt($this->config->get('subpe_salt'));
         $transaction_request->setReturnUrl($return_url);
         $transaction_request->setCurrencyCode(356);
         $transaction_request->setTxnType('SALE');
@@ -69,18 +69,18 @@ class ControllerPaymentBhartiPay extends Controller
         $postdata['action_url'] = $data['action'];
 		$postdata['button_confirm']= $this->language->get('button_confirm');
         // echo "<pre>";var_dump($postdata);die();
-        return $this->load->view('default/template/payment/bhartipay.tpl', $postdata);
+        return $this->load->view('default/template/payment/subpe.tpl', $postdata);
     }
 
     public function callback()
     {
-        $this->load->language('payment/bhartipay');
+        $this->load->language('payment/subpe');
 		$data['button_confirm']= $this->language->get('button_confirm');
-		$data['text_title']            = $this->language->get('Credit Card / Debit Card (BhartiPay)');
+		$data['text_title']            = $this->language->get('Credit Card / Debit Card (Subpe)');
 		$data['text_unable']           = $this->language->get('Unable to locate or update your order status');
-		$data['text_declined']         = $this->language->get('Payment was declined by BhartiPay');
-		$data['text_failed']           = $this->language->get('BhartiPay Transaction Failed');
-		$data['text_failed_message']   = $this->language->get('<p>Unfortunately there was an error processing your BhartiPay transaction.</p><p><b>Warning: </b>%s</p><p>Please verify your BhartiPay account balance before attempting to re-process this order</p><p> If you believe this transaction has completed successfully, or is showing as a deduction in your BhartiPay account, please <a href="%s">Contact Us</a> with your order details.</p>');
+		$data['text_declined']         = $this->language->get('Payment was declined by Subpe');
+		$data['text_failed']           = $this->language->get('Subpe Transaction Failed');
+		$data['text_failed_message']   = $this->language->get('<p>Unfortunately there was an error processing your Subpe transaction.</p><p><b>Warning: </b>%s</p><p>Please verify your Subpe account balance before attempting to re-process this order</p><p> If you believe this transaction has completed successfully, or is showing as a deduction in your Subpe account, please <a href="%s">Contact Us</a> with your order details.</p>');
 		$data['text_basket']           = $this->language->get('Basket');
 		$data['text_checkout']         = $this->language->get('Checkout');
 		$data['text_success']          = $this->language->get('Success'); 
@@ -105,7 +105,7 @@ class ControllerPaymentBhartiPay extends Controller
                 $error = $this->language->get('text_unable');
             } elseif ($this->request->post['STATUS'] != 'Captured') {
                 $error = $this->language->get('text_declined');
-            } elseif ($this->request->get['hash'] != md5($order_info['order_id'] . $order_info['total'] . $order_info['currency_code'] . $this->config->get('bhartipay_salt'))) {
+            } elseif ($this->request->get['hash'] != md5($order_info['order_id'] . $order_info['total'] . $order_info['currency_code'] . $this->config->get('subpe_salt'))) {
                 $error = $this->language->get('text_unable');
             }
         } else {
@@ -148,7 +148,7 @@ class ControllerPaymentBhartiPay extends Controller
 
             $this->response->setOutput($this->load->view('default/template/common/success.tpl', $data));
         } else {
-            $this->model_checkout_order->addOrderHistory($order_id, $this->config->get('bhartipay_order_status_id'));
+            $this->model_checkout_order->addOrderHistory($order_id, $this->config->get('subpe_order_status_id'));
 
             $this->response->redirect($this->url->link('checkout/success', 'language=' . $this->config->get('config_language')));
         }
